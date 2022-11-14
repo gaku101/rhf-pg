@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Select } from './components/Select';
+import { useForm, SubmitHandler, useFormState } from 'react-hook-form';
+
+export interface IFormValues {
+    Age: number;
+}
 
 function App() {
+  const { register, handleSubmit,formState } = useForm<IFormValues>({
+    defaultValues:{"Age":30}
+  });
+  // const { defaultValues } = useFormState()
+  // const onSubmit: SubmitHandler<IFormValues> = (data) => {
+  //   alert(JSON.stringify(data));
+// };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <form onSubmit={handleSubmit(onSubmit)}>
+    <Select label="Age" {...register('Age')} />
+    // <input type="submit" />
+// </form>
   );
 }
 
